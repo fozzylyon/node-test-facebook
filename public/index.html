@@ -1,0 +1,57 @@
+<html>
+
+<head></head>
+
+<body>
+	<div id="fb-root"></div>
+<script>
+window.fbAsyncInit = function() {
+    FB.init({
+        appId  : '469907593138099',
+        logging : true,
+        status : true,
+        cookie : true,
+        xfbml  : true,
+    });
+
+    FB.Event.subscribe('auth.login', function(response) {
+        alert('logged in');
+    });
+
+    FB.Event.subscribe('auth.logout', function(response) {
+        alert('logged out');
+    });     
+};
+
+function getFBLoginStatus() {
+    FB.getLoginStatus( function(response) {
+        console.log(response);
+        if (response.status === 'connected') {
+            var accessToken = response.authResponse.accessToken;
+            alert(accessToken);
+        } else if (response.status === 'not_authorized') {
+            //login function
+            alert('login first');
+        } else {
+            //login function
+            alert('login first');
+        }
+    }, true);
+}
+
+//Load the SDK Asynchronous
+(function(d) {
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all/debug.js";
+    ref.parentNode.insertBefore(js, ref);
+} (document));
+</script>
+
+<div>
+<a href="#" onclick="getFBLoginStatus()">test</a>
+</div>
+</body>
+
+</html>
